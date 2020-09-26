@@ -64,7 +64,7 @@ export default function Form({history}) {
 
         //make two forms? or use param in endpoint?
         const data = {
-            username: authInfo.name,
+            username: authInfo.username,
             password: authInfo.password,
             email: authInfo.email,
         }
