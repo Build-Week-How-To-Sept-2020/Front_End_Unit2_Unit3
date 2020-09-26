@@ -6,21 +6,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 .navs {
   padding:1% 5%;
-  background: #6fd4e6;
+  background: #6FD4E6;
 }
 .navs a{
   text-decoration: none;
   font-size:1.2rem;
   font-weight:600;
   color:white;
-  
 }
 .error {
   color:red;
@@ -28,7 +26,6 @@ code {
   font-weight:550
 }
 .form-container {
-  
   width:auto;
   margin: 1% 10% ;
   padding:2% 5%;
@@ -41,18 +38,13 @@ button {
   padding:1.5% 5%;
   font-size:2rem;
   border-radius:10px;
-
    }
    button:enabled{
-     background: #a3a5e9;
+     background: #A3A5E9;
    }
-  
-
-
 input {
   height:3vh;
   font-size:1.5rem;
-  
 }
 .addNewHowTo-container{
   width: 70%;
@@ -60,7 +52,6 @@ input {
   padding: 0 5%;
   border:solid rgb(196, 206, 196)
 }
-
 .addNewHowTo-container input {
   margin: 2% 0;
 }
@@ -73,7 +64,6 @@ textarea {
   width:40%;
   margin:1% 25%
 }
-
 .card-edit {
   border:solid rgb(196, 206, 196);
   padding: 2%;
@@ -81,18 +71,13 @@ textarea {
   display: flex;
   flex-direction: column;
 }
-
 .card-edit-container .delet:hover {
-  background: #ec2207;
+  background: #EC2207;
 }
 .card-edit-container .edit:hover {
-  background: #e7da63;
+  background: #E7DA63;
 }
-
-
 .card-container {
-  
-
   width:76%;
   padding: 2%;
   margin:1% 5%
@@ -102,10 +87,8 @@ textarea {
   width:50vw;
   margin:1% 5%;
   padding: 1% 5%;
-  
 }
 .card-button-container{
- 
     width:80%;
     margin: 1% 5%;
 }
@@ -113,15 +96,12 @@ textarea {
   width:40%;
   margin:1% 2%;
   padding: 0.5%;
- 
 }
 .card-list-container {
   display: flex;
- 
   /* width:100%; */
   justify-content:space-between;
   flex-wrap: wrap;
- 
   margin:10%;
   padding: 2.5%;
 }

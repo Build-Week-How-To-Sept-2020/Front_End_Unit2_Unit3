@@ -12,21 +12,25 @@ width:45%;
 margin: 0 10%;
 justify-content: space-between`
 
+const formSchema = yup.object().shape({
+    title: yup.string().required('Must Enter Title'),
+    contents: yup.string().required('Must provide the instructions')
+})
+
 export default function AddHowToForm() {
     const {howtos, setHowTos} = React.useContext(GlobalContext);
     const [newHowTo, setNewHowTo] = useState({
+        user_id: localStorage.getItem("id"),
         title: "",
-        content: ""
+        contents: ""
     })
     const[errors,setErrors]= useState({
         title: "",
-        content: ""
+        contents: ""
     })
     const[disabledButton,setDisabledButton] = useState(true);
-    const formSchema = yup.object().shape({
-        title: yup.string().required('Must Enter Title'),
-        content: yup.string().required('Must provide the instructions')
-    })
+    let id = localStorage.getItem("id");
+   
     const validate = e=>{
         yup
         .reach(formSchema,e.target.name)
@@ -59,15 +63,20 @@ export default function AddHowToForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axiosWithAuth().post("https://reqres.in/api/howtos", newHowTo)
-            .then(res => {
-                setHowTos([...howtos, res.data])
-                console.log('how tos ',howtos);
 
-                setNewHowTo({
-                    title: "",
-                    content: ""
+        axiosWithAuth().post(`https://joses-how-to-api.herokuapp.com/api/users/${id}/posts`, newHowTo)
+            .then(res => {
+                axiosWithAuth().get(`https://joses-how-to-api.herokuapp.com/api/users/${id}/posts`)
+                .then(res => {
+                    setHowTos([...howtos, res.data])
+                    console.log('how tos ',howtos);
+    
+                    setNewHowTo({
+                        title: "",
+                        contents: ""
+                    })
                 })
+               
             })
             .catch(err => console.log(err))
     }
@@ -86,11 +95,11 @@ export default function AddHowToForm() {
                      {errors.title.length>0?<p className= 'error'>{errors.title}</p>:null}
                 <textarea 
                     type='textArea'
-                    name="content"
-                    value={newHowTo.content}
+                    name="contents"
+                    value={newHowTo.contents}
                     onChange={handleChange} 
                     placeholder="Instructions" />
-                     {errors.content.length>0?<p className= 'error'>{errors.content}</p>:null}
+                     {errors.contents.length>0?<p className= 'error'>{errors.contents}</p>:null}
                 <button disabled = {disabledButton} type="submit">Submit</button>
             </Group>
            

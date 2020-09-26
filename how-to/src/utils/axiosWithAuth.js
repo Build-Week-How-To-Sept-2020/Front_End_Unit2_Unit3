@@ -6,7 +6,7 @@ const axiosAuth = () => {
     return axios.create({
         baseURL: "",
         headers: {
-            authorization: token
+            authorization: "BEARER " + token
         }
     })
 }

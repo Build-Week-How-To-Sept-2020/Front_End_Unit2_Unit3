@@ -6,7 +6,7 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import { GlobalContext } from "../context/GlobalContext";
 
 export default function Dashboard() {
-  const { howtos, setHowtos } = useContext(GlobalContext);
+  const [ howtos, setHowtos ] = useContext(GlobalContext);
 //   const [editing, setEditing] = useState(0);
   const [howToRes, searchHowToRes] = useState([]);
   const [search, howToSearch] = useState("");

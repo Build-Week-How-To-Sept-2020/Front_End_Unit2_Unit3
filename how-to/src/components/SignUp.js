@@ -1,4 +1,3 @@
-
 import React, {useState,useEffect} from "react";
 import axios from "axios";
 import {GlobalContext} from "../context/GlobalContext";
@@ -12,7 +11,21 @@ flex-direction:column;
 padding:1% 0;
 width:45%;`
 
-export default function Form({role, history}) {
+
+const formSchema = yup.object().shape({
+    name: yup.string().required('Name is a required field').min(2,'minimum two characters'),
+    email: yup.string().email('enter a valid email').required('email is required field'),
+    username: yup.string().required('Must choose a user name').min(4,'minimum four characters'),
+    password: yup.string().required("Please enter your password.").min(6), /*matches(
+        /^.*(?=.{6,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+       "Must Contain 6 Characters, One Uppercase, One Lowercase, One Number and one special case Character")*/
+    confirmPassword: yup.string().oneOf([yup.ref('password'),null],'Passwords must match'),
+    terms: yup.boolean().oneOf([true],'please agree the terms'),
+})
+
+
+
+export default function Form({history}) {
     const {setLoggedIn} = React.useContext(GlobalContext);
 
     const [authInfo, setAuthInfo] = useState( {
@@ -50,8 +63,13 @@ export default function Form({role, history}) {
         e.preventDefault();
 
         //make two forms? or use param in endpoint?
-        
-        axios.post( `https://joses-how-to-api.herokuapp.com/api/auth/register`, authInfo)
+        const data = {
+            username: authInfo.name,
+            password: authInfo.password,
+            email: authInfo.email,
+        }
+        console.log(data);
+        axios.post( `https://joses-how-to-api.herokuapp.com/api/auth/register`, data)
             .then(res => {
                 console.log(res)
                     setLoggedIn(true);
@@ -61,16 +79,6 @@ export default function Form({role, history}) {
             .catch(err => console.log(err.message))
     }
 
-    const formSchema = yup.object().shape({
-        name: yup.string().required('Name is a required field').min(2,'minimum two characters'),
-        email: yup.string().email('enter a valid email').required('email is required field'),
-        username: yup.string().required('Must choose a user name').min(4,'minimum four characters'),
-        password: yup.string().required("Please enter your password.").min(6), /*matches(
-            /^.*(?=.{6,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-           "Must Contain 6 Characters, One Uppercase, One Lowercase, One Number and one special case Character")*/
-        confirmPassword: yup.string().oneOf([yup.ref('password'),null],'Passwords must match'),
-        terms: yup.boolean().oneOf([true],'please agree the terms'),
-    })
 
     const validateInput = event=>{
         yup
@@ -126,7 +134,7 @@ export default function Form({role, history}) {
            <Group>
                <label htmlFor='confirmPassword'>Confirm Password</label>
                <input type='text' id='confirmPassword' name ='confirmPassword' value={authInfo.confirmPassword} onChange={handleChange}/>
-               {authInfo.password !=authInfo.confirmPassword?<p className='error'>{errors.confirmPassword}</p>:null}
+               {authInfo.password !==authInfo.confirmPassword?<p className='error'>{errors.confirmPassword}</p>:null}
            </Group>
            <Group>
                <label htmlFor='terms'>Please agree to the terms</label>

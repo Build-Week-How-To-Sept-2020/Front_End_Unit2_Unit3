@@ -1,4 +1,3 @@
-
 import React, { useState,useEffect } from "react";
 import axios from "axios";
 import *as yup from 'yup'
@@ -6,7 +5,6 @@ import { GlobalContext } from "../context/GlobalContext";
 import styled from 'styled-components'
 
 const Group = styled.div`
-
 display:flex;
 flex-direction:column;
 padding:1% 0;
@@ -81,6 +79,7 @@ useEffect(()=>{
         console.log(res);
         setLoggedIn(true);
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("id", res.data.id)
         history.push("/Dashboard");
       })
       .catch((err) => console.log(err.message));
