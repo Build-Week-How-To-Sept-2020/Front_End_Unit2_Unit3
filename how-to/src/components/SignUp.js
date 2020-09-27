@@ -64,7 +64,7 @@ export default function Form({history}) {
 
         //make two forms? or use param in endpoint?
         const data = {
-            username: authInfo.name,
+            username: authInfo.username,
             password: authInfo.password,
             email: authInfo.email,
         }
@@ -74,7 +74,7 @@ export default function Form({history}) {
                 console.log(res)
                     setLoggedIn(true);
                     localStorage.setItem("token", res.data.token)
-                    history.push('/login')
+                    history.push('/')
             })
             .catch(err => console.log(err.message))
     }

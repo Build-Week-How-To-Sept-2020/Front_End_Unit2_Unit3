@@ -47,15 +47,6 @@ export default function Dashboard () {
         }
     }
 
-    // const handleChange = e => setEdited({...edited, [e.target.name]: e.target.value});
-
-
-    // const deleteHowTo = id => {
-    //     axiosWithAuth().delete(`https://url.herokuapp.com/howtos/${id}`)
-    //         .then(res => setHowtos(howtos.filter(item => item.id !== id)))
-    //         .catch(err => console.log(err));
-    // } 
-
 
     return(
         <div className='dashboard-conatainer'>

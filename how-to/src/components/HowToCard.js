@@ -81,12 +81,11 @@ const HowToCard = () => {
 
             }
           <div className='card-button-container'>
-        <button postid = {howto.id} onClick={(_) => toggleEdit(howto)}>
+        <button className='edit' postid = {howto.id} onClick={(_) => toggleEdit(howto)}>
 
               {editing === howto.id ? "Submit" : "Edit How To"}{" "}
             </button>
-            <p>{howto.title}</p>
-            <button onClick={(_) => deleteHowTo(howto.id)}>Delete HowTo</button>
+            <button className='delet' onClick={(_) => deleteHowTo(howto.id)}>Delete HowTo</button>
             </div>
           </div>
         )
